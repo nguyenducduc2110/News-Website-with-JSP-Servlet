@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ===>Tóm lại đây chỉ là file cấu hình các template để filter lọc các template trong dir decorators -->
+
+<decorators defaultdir="/decorators"> <!-- là dir decorators of dir webapp chứa các css  -->
+	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
+	
+	<excludes><!-- excludes là những template bị loại bỏ khỏi sitemesh-->
+		<pattern>/api*</pattern>
+	</excludes>
+	<!-- apply Sitemesh default template -->
+	<decorator name="admin" page="admin.jsp"> <!-- decorator là thẻ để các page có tên là admin thì chạy template "admin.jsp" -->
+		<pattern>/admin*</pattern>            <!-- chạy = cách ánh xạ vs bất kì url nào begin = /admin -->
+	</decorator>
+	<decorator name="web" page="web.jsp">
+		<pattern>/*</pattern>				  <!-- ánh xạ vs bất kì url nào trừ url /admin, /api -->
+	</decorator>
+	<decorator name="login" page="login.jsp">
+		<pattern>/dang-nhap*</pattern>				 
+	</decorator>
+</decorators>

@@ -1,0 +1,75 @@
+---2 file admin.jsp và web.jsp dir này chỉ để add các thư viện của template để cho template trong dir decorator sử dụng
+==>Vì khi sao chép code của file index.html trong visuacode vào template web.jsp  thì code sẽ phải trỏ đến thư viện  
+
+---ctrl+shift+O :Để xoá các package không dùng tới
+
+
+---package util: là những class thường đc sử dụng như các collection(TT như: List, Object,...)
++Trong đó class HttpUtil thường đc use để đẩy các http đẩy(get) data lên client or nhận(post) data từ client về server
+
+---<!-- header -->
+	<%@ include file="/common/web/header.jsp"%><!-- (gắn trang jsp khác vào vị trí hiện tại). -->
+	<!-- header -->
+	<!-- Cái này có container rồi nên ko cần copy container trong của html nữa -->
+	<div class="container"> <!-- thẻ div để chứa content của trang-chu -->
+		<dec:body /> <!-- trong đoạn code này <dec:body /> sẽ là nơi nội dung của trang web muốn chèn vào template web.jsp có sắn header và footer -->
+					 <!-- tức là thẻ <dec:body/>  sẽ tham chiếu đến nội dung trang web mong muốn -->
+					 <!-- dec này là biến trong file taglib.jps đc declare là prefix:"dec" -->
+	</div>
+	<!-- footer -->
+	<%@ include file="/common/web/footer.jsp"%>
+	<!-- footer -->
+
+---Ctrl+shift+T: Tìm source dạng class,  Ctrl+T: Redo., Ctrl+shift+R:Tìm source dạng file jsp,...
+
+
+---file db.propertice:
++tách biệt cấu hình ra khỏi mã nguồn để linh hoạt hơn và dễ bảo trì hơn.Do bạn có thể dễ  dàng thay đổi thông số(mk database, tên user) ở file database mà không làm ảnh hưởng đến code.
++file này có thể tái sử dụng ở các dự án khác.
+
+
+--file messege.propertice:
++Lý do không cho value trực tiếp vào url reponse mà phải gọi key ở file messege.propertice là vì: thông báo(messege) là tiếng việt và có space
+nên không truyền đc vào url của reponse.
+
+
+---Các TH cần handle:
+-TH1:
+   +Chưa login vào admin và user mà chỉ cần gõ trên url là:http:
+   +Yêu cầu:chưa login thì không truy cập đc vào link bắt đầu = /admin
+-TH2:
+	+Xử lý không cho Khi đã login vào user rồi gõ trên trình duyệt là /admin-home thì nó sẽ lấy UserModel current ở login.jsp set cho UserModel ở trang admin.jsp và ngược lại khi đã đăng nhập vào tk admin xong rồi nó cũng set cho user
+===>Bằng cách dùng Servlet filter để authorization(Phân quyền truy cập cho mỗi user)
+
+
+---Package Utill
++FormUtil:Ánh xạ từ 1 chuỗi ở request key-valua từ jsp sang servlet thành model or datatype Object thông qua key=attribute
++HttpUtil:Ánh xạ từ 1 luồng JSON từ postman(or request) sang servlet thành model or datatype Object(như Long,..) thông qua key=attribute
++SessionUtil:là 1 object duy nhất quản lý 1 session rồi setValue cho session là 1objec User(Chứa info user or admin) 
+
+
+---Cơ chế chung trong việc giao tiếp của trang jsp và servlet:
++B1:
+	-Khi 1 phần tử trong trang(vd nút đăng nhập) đc nhấn vào thì phần tử đó sẽ dựa vào
+	
+	 thẻ <c:url> để gửi URL cùng request tới servlet(URL có thể có param or không có param để servlet lấy handle)
+	-Còn với phân trang thì submit 1 form sang(Tức là ánh xạ các name CỦA THẺ INPUT ẨN  trong form có tên cùng với thuộc tính của model rồi gán value or name cho attribute)
+	VD:
+	<input type="hidden" value="" id="page" name="page"/>							
+	<input type="hidden" value="" id="maxPageItem" name="maxPageItem"/>					
+	-->URL đc tạo ra do ánh xạ name từ thẻ <input>:::?/page=làvalueđcsetval/maxPageItem=làvalueđcsetval
+	-->Chứ không phải tham số ở thẻ input truyền vào url ở trang menu.jsp.
++B2:Khi url cùng request đến servlet, thì Servlet sẽ dựa vào context của url để handle logic dưới data và setAttribute phản hồi cho trang jsp.
+VD:Phân trang, edit bài báo, đăng nhập, thêm,xoá, thoát,...Sử dụng cơ chế trên.
+
+
+---Phân luồng URL sao cho tên phù hợp với chức năng của nó(Đây chỉ là hệ thống url để học jsp, servlet trong dự án thực tế hoàn toàn khác):
++"/admin-news" of (NewsController) dùng để lấy data rồi tính toán data và setAttribute cho jsp sử dụng cho việc điều khiển(controller) phân trang cho bài báo.
++"/api-admin-news" of (NewsAPI) dùng để insert(doPost), get(doGet), delete(doDelete), update(doPut) data và setAtttribute cho trang jsp theo kiến trúc REST.
++"/admin-home" of (HomeController) để điều khiển các luồng request khi có click trên trang home của admin VD:đăng nhập, thoát,...
+
+
+---Hàm save bài báo thường là sau khi save thì lấy id bài vừa save và tìm bài đó lên để hiển thị lên jsp bài vừa save
+
+
+--folder ckeditor chỉ là 1 lib giúp thẻ textarea nhập, format, edit văn bản tốt hơn thôi

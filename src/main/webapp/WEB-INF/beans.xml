@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http:
+       xmlns:xsi="http:
+       xsi:schemaLocation="http:
+	http:
+</beans>
+
+<!-- file bean này sẽ tạo ra 1 thùng chứa, chứa các instance of class khi vừa compile program
+ và khi người dùng gửi request cái nào đc đánh dấu là @inject thì nó sẽ vào thùng chứa tìm instance of class đó đã đc tạo chưa.
+ Nếu đc tạo rồi nó sẽ lấy ra dùng, còn nếu chưa đc tạo thì nó sẽ instance of class đó.
+ -->

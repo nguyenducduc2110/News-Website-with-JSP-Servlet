@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extended Support Model.
+-->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Adapter &mdash; CKEditor Sample</title>
+	<script src="http:
+	<script src="../../ckeditor.js"></script>
+	<script src="../../adapters/jquery.js"></script>
+	<link href="sample.css" rel="stylesheet">
+	<meta name="description" content="Try the latest sample of CKEditor 4 and learn more about customizing your WYSIWYG editor with endless possibilities.">
+	<style>
+
+		#editable
+		{
+			padding: 10px;
+			float: left;
+		}
+
+	</style>
+	<script>
+
+		CKEDITOR.disableAutoInline = true;
+
+		$( document ).ready( function() {
+			$( '#editor1' ).ckeditor( {
+				on: {
+					contentPreview: function( evt ) {
+						evt.data.dataValue = '<div style="padding: 1.5em;border: 3px #f00 solid">' +
+								'<h1>Content Preview was blocked</h1>' +
+								'<p>To ensure the highest security, the content preview in samples was blocked.</p>' +
+								'<p>Please refer to our ' +
+									'<a href="https:
+									'best practices on security</a> to learn more how to properly configure and secure the content preview.</p>' +
+							'</div>';
+					}
+				}
+			} ); 
+			$( '#editable' ).ckeditor( {
+				on: {
+					contentPreview: function( evt ) {
+						evt.data.dataValue = '<div style="padding: 1.5em;border: 3px #f00 solid">' +
+								'<h1>Content Preview was blocked</h1>' +
+								'<p>To ensure the highest security, the content preview in samples was blocked.</p>' +
+								'<p>Please refer to our ' +
+									'<a href="https:
+									'best practices on security</a> to learn more how to properly configure and secure the content preview.</p>' +
+							'</div>';
+					}
+				}
+			} ); 
+		} );
+
+		function setValue() {
+			$( '#editor1' ).val( $( 'input#val' ).val() );
+		}
+
+	</script>
+</head>
+<body>
+	<h1 class="samples">
+		<a href="index.html" id="a-test">CKEditor Samples</a> &raquo; Create Editors with jQuery
+	</h1>
+	<div class="warning deprecated">
+		This sample is not maintained anymore. Check out the <a href="https:
+	</div>
+	<form action="sample_posteddata.php" method="post">
+		<div class="description">
+			<p>
+				This sample shows how to use the <a href="https:
+				Note that you have to include both CKEditor and jQuery scripts before including the adapter.
+			</p>
+
+<pre class="samples">
+&lt;script src="
+&lt;script src="/ckedit../../ckeditor.js"&gt;&lt;/script&gt;
+&lt;script src="/ckeditor/adapters/jquery.js"&gt;&lt;/script&gt;
+</pre>
+
+			<p>Then you can replace HTML elements with a CKEditor instance using the <code>ckeditor()</code> method.</p>
+
+<pre class="samples">
+$( document ).ready( function() {
+	$( 'textarea#editor1' ).ckeditor();
+} );
+</pre>
+		</div>
+
+		<h2 class="samples">Inline Example</h2>
+
+		<div id="editable" contenteditable="true">
+			<p><img alt="Saturn V carrying Apollo 11" class="right" src="assets/sample.jpg"/><b>Apollo 11</b> was the spaceflight that landed the first humans, Americans <a href="http:
+			<p>Armstrong spent about <s>three and a half</s> two and a half hours outside the spacecraft, Aldrin slightly less; and together they collected 47.5 pounds (21.5&nbsp;kg) of lunar material for return to Earth. A third member of the mission, <a href="http:
+			<p>Broadcast on live TV to a world-wide audience, Armstrong stepped onto the lunar surface and described the event as:</p>
+			<blockquote><p>One small step for [a] man, one giant leap for mankind.</p></blockquote> <p>Apollo 11 effectively ended the <a href="http:
+		</div>
+
+		<br style="clear: both">
+
+		<h2 class="samples">Classic (iframe-based) Example</h2>
+
+		<textarea cols="80" id="editor1" name="editor1" rows="10">
+			&lt;h2&gt;Technical details &lt;a id=&quot;tech-details&quot; name=&quot;tech-details&quot;&gt;&lt;/a&gt;&lt;/h2&gt; &lt;table align=&quot;right&quot; border=&quot;1&quot; bordercolor=&quot;#ccc&quot; cellpadding=&quot;5&quot; cellspacing=&quot;0&quot; style=&quot;border-collapse:collapse;margin:10px 0 10px 15px;&quot;&gt; &lt;caption&gt;&lt;strong&gt;Mission crew&lt;/strong&gt;&lt;/caption&gt; &lt;thead&gt; &lt;tr&gt; &lt;th scope=&quot;col&quot;&gt;Position&lt;/th&gt; &lt;th scope=&quot;col&quot;&gt;Astronaut&lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt; &lt;td&gt;Commander&lt;/td&gt; &lt;td&gt;Neil A. Armstrong&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;Command Module Pilot&lt;/td&gt; &lt;td&gt;Michael Collins&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;Lunar Module Pilot&lt;/td&gt; &lt;td&gt;Edwin &amp;quot;Buzz&amp;quot; E. Aldrin, Jr.&lt;/td&gt; &lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt; &lt;p&gt;Launched by a &lt;strong&gt;Saturn V&lt;/strong&gt; rocket from &lt;a href=&quot;http:
+		</textarea>
+
+		<p style="overflow: hidden">
+			<input style="float: left" type="submit" value="Submit">
+			<span style="float: right">
+				<input type="text" id="val" value="I'm using jQuery val()!" size="30">
+				<input onclick="setValue();" type="button" value="Set value">
+			</span>
+		</p>
+	</form>
+	<div id="footer">
+		<hr>
+		<p>
+			CKEditor - The text editor for the Internet - <a class="samples" href="https:
+		</p>
+		<p id="copy">
+			Copyright &copy; 2003-2023, <a class="samples" href="https:
+		</p>
+	</div>
+</body>
+</html>

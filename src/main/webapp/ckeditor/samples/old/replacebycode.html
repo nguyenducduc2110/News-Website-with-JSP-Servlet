@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extended Support Model.
+-->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Replace Textarea by Code &mdash; CKEditor Sample</title>
+	<script src="../../ckeditor.js"></script>
+	<link href="sample.css" rel="stylesheet">
+	<meta name="description" content="Try the latest sample of CKEditor 4 and learn more about customizing your WYSIWYG editor with endless possibilities.">
+</head>
+<body>
+	<h1 class="samples">
+		<a href="index.html">CKEditor Samples</a> &raquo; Replace Textarea Elements Using JavaScript Code
+	</h1>
+	<div class="warning deprecated">
+		This sample is not maintained anymore. Check out its <a href="https:
+	</div>
+	<form action="sample_posteddata.php" method="post">
+		<div class="description">
+			<p>
+				This editor is using an <code>&lt;iframe&gt;</code> element-based editing area, provided by the <strong>Wysiwygarea</strong> plugin.
+			</p>
+<pre class="samples">
+CKEDITOR.replace( '<em>textarea_id</em>' )
+</pre>
+		</div>
+		<textarea cols="80" id="editor1" name="editor1" rows="10">
+			&lt;h1&gt;&lt;img alt=&quot;Saturn V carrying Apollo 11&quot; class=&quot;right&quot; src=&quot;assets/sample.jpg&quot;/&gt; Apollo 11&lt;/h1&gt; &lt;p&gt;&lt;b&gt;Apollo 11&lt;/b&gt; was the spaceflight that landed the first humans, Americans &lt;a href=&quot;http:
+		</textarea>
+		<script>
+
+			
+			
+			
+
+			
+			
+
+			CKEDITOR.replace( 'editor1', {
+				on: {
+					contentPreview: function( evt ) {
+						evt.data.dataValue = '<div style="padding: 1.5em;border: 3px #f00 solid">' +
+								'<h1>Content Preview was blocked</h1>' +
+								'<p>To ensure the highest security, the content preview in samples was blocked.</p>' +
+								'<p>Please refer to our ' +
+									'<a href="https:
+									'best practices on security</a> to learn more how to properly configure and secure the content preview.</p>' +
+							'</div>';
+					}
+				}
+			} );
+
+		</script>
+		<p>
+			<input type="submit" value="Submit">
+		</p>
+	</form>
+	<div id="footer">
+		<hr>
+		<p>
+			CKEditor - The text editor for the Internet - <a class="samples" href="https:
+		</p>
+		<p id="copy">
+			Copyright &copy; 2003-2023, <a class="samples" href="https:
+		</p>
+	</div>
+</body>
+</html>
